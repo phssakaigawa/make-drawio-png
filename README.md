@@ -3,12 +3,15 @@
 [![PyPI version](https://img.shields.io/pypi/v/make-drawio-png)](https://pypi.org/project/make-drawio-png/)
 [![Python](https://img.shields.io/pypi/pyversions/make-drawio-png)](https://pypi.org/project/make-drawio-png/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/phssakaigawa/make-drawio-png/blob/main/LICENSE)
+[![CI](https://github.com/phssakaigawa/make-drawio-png/actions/workflows/ci.yml/badge.svg)](https://github.com/phssakaigawa/make-drawio-png/actions/workflows/ci.yml)
+
+**[日本語版 README はこちら → README.ja.md](README.ja.md)**
 
 Convert `.drawio` XML files into **re-editable `.drawio.png`** — zero external
 dependencies, pure Python standard library.
 
 The `.drawio.png` format embeds the diagram XML inside a PNG `tEXt` chunk
-(`keyword=mxfile`, `value=URL-encoded UTF-8 XML`).  
+(`keyword=mxfile`, `value=URL-encoded UTF-8 XML`).
 draw.io / diagrams.net reads that chunk to restore the diagram, so the file is
 both a **valid PNG** (viewable anywhere, readable by AI agents) *and* a
 **fully editable draw.io source**.
@@ -30,26 +33,44 @@ pip install make-drawio-png
 ### CLI
 
 ```bash
-# output defaults to <input>.drawio.png
-make-drawio-png architecture.drawio
+# embed only — re-editable but 1×1 placeholder image (no draw.io needed)
+python -m make_drawio_png architecture.drawio
+
+# render + embed — visually rendered AND re-editable (requires draw.io desktop)
+python -m make_drawio_png --render architecture.drawio
 
 # explicit output path
-make-drawio-png flow.drawio docs/images/flow.drawio.png
-
-# also works as a Python module (no PATH needed)
-python -m make_drawio_png architecture.drawio
+python -m make_drawio_png --render flow.drawio docs/images/flow.drawio.png
 ```
+
+> **Windows / Bob shell users:** Use `python -m make_drawio_png` instead of the
+> `make-drawio-png` command — it works without any PATH changes.  See the
+> [PATH guide](#windows--python-path-guide) below.
 
 ### Python API
 
 ```python
-from make_drawio_png import drawio_to_png
+from make_drawio_png import drawio_export, drawio_to_png
 
+# Recommended: render + embed (requires draw.io desktop)
+drawio_export("architecture.drawio")
+# → architecture.drawio.png  (rendered + re-editable)
+
+# Zero dependencies: embed only (re-editable, 1×1 placeholder image)
 drawio_to_png("architecture.drawio")
-# → architecture.drawio.png  (28.5 KB)
-
-drawio_to_png("flow.drawio", "docs/images/flow.drawio.png")
+# → architecture.drawio.png  (re-editable, no visual content)
 ```
+
+### draw.io desktop (required for `--render` / `drawio_export`)
+
+```bash
+winget install JGraph.Draw   # Windows
+brew install --cask drawio   # macOS
+snap install drawio          # Linux
+```
+
+The CLI is auto-detected after installation.
+Set `DRAWIO_PATH` to override the location.
 
 ---
 
@@ -133,28 +154,18 @@ subprocess.run([scripts / "make-drawio-png", "architecture.drawio"])
 
 ## How it works
 
-```
-.drawio (XML)
-    │
-    ▼  URL-encode UTF-8
-    │
-    ▼  insert as PNG tEXt chunk  (keyword="mxfile")
-    │
-    ▼
-.drawio.png
-    ├── valid PNG  → viewable in any image viewer / AI agent
-    └── tEXt[mxfile] = URL-encoded XML  → draw.io restores full diagram
-```
+![How make-drawio-png works](docs/how-it-works.drawio.png)
 
-The PNG image itself is a 1×1 white pixel placeholder; draw.io derives the
-canvas size and all content from the embedded XML.
+The `.drawio.png` file is both a valid PNG image and a re-editable draw.io
+source.  draw.io reads the embedded `tEXt[mxfile]` chunk to restore the full
+diagram; image viewers and AI agents see only the PNG pixel data.
 
 ### PNG chunk layout
 
 ```
 PNG Signature  (8 bytes)
 IHDR chunk     (25 bytes)
-tEXt chunk     (keyword="mxfile" \x00 URL-encoded-XML)   ← embedded here
+tEXt chunk     (keyword="mxfile" \x00 URL-encoded-XML)   ← diagram XML here
 IDAT chunk     (compressed pixel data)
 IEND chunk
 ```
