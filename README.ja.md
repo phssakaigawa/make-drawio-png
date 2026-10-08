@@ -7,13 +7,27 @@
 
 **[English README → README.md](README.md)**
 
-`.drawio` XML ファイルを **再編集可能な `.drawio.png`** に変換するツールです。  
-外部依存ゼロ、Python 標準ライブラリのみで動作します。
+[draw.io / diagrams.net](https://www.diagrams.net/) が使用する **`.drawio.png` ファイル形式**を
+実装した Python ライブラリです。
 
-`.drawio.png` 形式は、PNG の `tEXt` チャンク（`keyword=mxfile`、`value=URL-encoded UTF-8 XML`）に
-図の XML を埋め込みます。draw.io / diagrams.net はこのチャンクを読んで図を復元するため、
-このファイルは **通常の PNG**（どこでも表示可能、AI エージェントも読める）かつ
-**draw.io で完全に再編集できるソース** でもあります。
+このライブラリを使うと、**draw.io を起動せずにプログラムから `.drawio.png` を生成**できます。
+生成されたファイルは draw.io 本体がエクスポートしたものと完全に互換性があります。
+
+### `.drawio.png` 形式とは？
+
+`.drawio.png` ファイルは同時に2つの性質を持ちます：
+- **標準的な PNG 画像** — あらゆる画像ビューア・ブラウザ・AI エージェントで表示できる
+- **draw.io で完全に再編集できるソース** — draw.io で開くと図が復元され、編集できる
+
+これは PNG の `tEXt` チャンク（`keyword=mxfile`、`value=URL-encoded UTF-8 XML`）に図の XML を
+埋め込む [draw.io オープンソース仕様](https://github.com/jgraph/drawio) に準拠することで実現しています。
+draw.io はこのチャンクを読んで図を復元し、画像ビューアはピクセルデータのみを参照します。
+
+### ユースケース
+
+- **AI エージェント / Bob**: 図をコードとして生成し、Markdown に埋め込んで PNG としてプレビュー
+- **CI/CD パイプライン**: GUI なしで `.drawio` XML からアーキテクチャ図を生成
+- **ドキュメント自動化**: レンダリング済み画像と再編集可能なソースを同一ファイルで管理
 
 ---
 

@@ -7,14 +7,29 @@
 
 **[日本語版 README はこちら → README.ja.md](README.ja.md)**
 
-Convert `.drawio` XML files into **re-editable `.drawio.png`** — zero external
-dependencies, pure Python standard library.
+A Python library that implements the **`.drawio.png` file format** — the
+re-editable PNG format used by [draw.io / diagrams.net](https://www.diagrams.net/).
 
-The `.drawio.png` format embeds the diagram XML inside a PNG `tEXt` chunk
-(`keyword=mxfile`, `value=URL-encoded UTF-8 XML`).
-draw.io / diagrams.net reads that chunk to restore the diagram, so the file is
-both a **valid PNG** (viewable anywhere, readable by AI agents) *and* a
-**fully editable draw.io source**.
+With this library you can **generate `.drawio.png` files programmatically**,
+without opening draw.io at all.  The generated files are indistinguishable
+from those exported by draw.io itself.
+
+### What is the `.drawio.png` format?
+
+A `.drawio.png` file is simultaneously:
+- a **standard PNG image** — viewable in any image viewer, browser, or AI agent
+- a **fully editable draw.io source** — open it in draw.io to restore and edit the diagram
+
+This is achieved by embedding the diagram XML inside a PNG `tEXt` chunk
+(`keyword=mxfile`, `value=URL-encoded UTF-8 XML`), following the
+[draw.io open-source specification](https://github.com/jgraph/drawio).
+draw.io reads that chunk to restore the diagram; image viewers see only the PNG pixel data.
+
+### Use cases
+
+- **AI agents / Bob**: generate diagrams as code, embed them in Markdown docs, preview as PNG
+- **CI/CD pipelines**: produce architecture diagrams from `.drawio` XML without a GUI
+- **Documentation automation**: keep diagrams as re-editable sources alongside rendered images
 
 ---
 
