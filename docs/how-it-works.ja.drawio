@@ -1,0 +1,145 @@
+<mxfile host="app.diagrams.net" modified="2026-10-09T00:00:00.000Z" agent="Bob AI" version="21.0.0" type="device">
+  <diagram id="how-it-works-ja" name="make-drawio-png の仕組み">
+    <mxGraphModel dx="1400" dy="600" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1200" pageHeight="420" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===== タイトル ===== -->
+        <mxCell id="title" value="&lt;b&gt;&lt;font style='font-size:16px;'&gt;make-drawio-png の仕組み&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="200" y="10" width="600" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- ===== .drawio 入力 ===== -->
+        <mxCell id="src" value=".drawio&#xa;mxfile XML" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;align=center;" vertex="1" parent="1">
+          <mxGeometry x="40" y="155" width="110" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===== ① URL エンコード ===== -->
+        <mxCell id="step1" value="&lt;b&gt;① URL エンコード&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px;'&gt;UTF-8 → %XX ASCII&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="185" y="160" width="155" height="54" as="geometry" />
+        </mxCell>
+
+        <!-- ===== ② 1×1 白 PNG 生成 ===== -->
+        <mxCell id="step2" value="&lt;b&gt;② 1×1 白 PNG 生成&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px;'&gt;IHDR + IDAT + IEND&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="390" y="65" width="155" height="54" as="geometry" />
+        </mxCell>
+
+        <!-- ===== ③ tEXt チャンク挿入 ===== -->
+        <mxCell id="step3" value="&lt;b&gt;③ tEXt チャンク挿入&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px;'&gt;keyword=&quot;mxfile&quot;&lt;br/&gt;value=URL エンコード XML&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="390" y="255" width="155" height="64" as="geometry" />
+        </mxCell>
+
+        <!-- ===== .drawio.png 出力 ===== -->
+        <mxCell id="out" value="&lt;b&gt;.drawio.png&lt;/b&gt;" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;html=1;image=img/lib/active_directory/generic_server.svg;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;align=center;" vertex="1" parent="1">
+          <mxGeometry x="600" y="152" width="70" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ===== AI エージェント ===== -->
+        <mxCell id="ai-app" value="&lt;b&gt;AI エージェント / Bob&lt;/b&gt;&lt;br/&gt;PNG 画像として参照&lt;br/&gt;→ 視覚的に確認" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="730" y="55" width="145" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ===== draw.io アプリ ===== -->
+        <mxCell id="drawio-app" value="&lt;b&gt;draw.io&lt;/b&gt;&lt;br/&gt;tEXt[mxfile] を読み込み&lt;br/&gt;→ 図を復元" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="730" y="270" width="145" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ===== PNG チャンク構造 ===== -->
+        <mxCell id="layout-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;opacity=40;" vertex="1" parent="1">
+          <mxGeometry x="940" y="55" width="200" height="295" as="geometry" />
+        </mxCell>
+        <mxCell id="layout-title" value="&lt;b&gt;PNG チャンク構造&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="940" y="63" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c-sig" value="PNG シグネチャ  (8 bytes)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="955" y="91" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c-ihdr" value="IHDR チャンク  (25 bytes)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="955" y="129" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c-text" value="&lt;b&gt;tEXt チャンク ← ここに埋め込み&lt;/b&gt;&lt;br/&gt;keyword=&quot;mxfile&quot; \0 URL-XML" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="955" y="167" width="170" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="c-idat" value="IDAT チャンク  (ピクセルデータ)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="955" y="221" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c-iend" value="IEND チャンク" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="955" y="259" width="170" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ===== 矢印 ===== -->
+        <!-- src → step1 -->
+        <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="src" target="step1" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- step1 → step2 (上へ) -->
+        <mxCell id="a2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;strokeWidth=2;" edge="1" source="step1" target="step2" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="362" y="187" />
+              <mxPoint x="362" y="92" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- step1 → step3 (下へ) -->
+        <mxCell id="a3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;strokeWidth=2;" edge="1" source="step1" target="step3" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="362" y="187" />
+              <mxPoint x="362" y="287" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- step2 → out -->
+        <mxCell id="a4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;strokeWidth=2;" edge="1" source="step2" target="out" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590" y="92" />
+              <mxPoint x="620" y="92" />
+              <mxPoint x="620" y="165" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- step3 → out -->
+        <mxCell id="a5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;strokeWidth=2;" edge="1" source="step3" target="out" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590" y="287" />
+              <mxPoint x="620" y="287" />
+              <mxPoint x="620" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- out → ai-app (上右) -->
+        <mxCell id="a6" value="表示可能" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;fontSize=10;exitX=1;exitY=0;exitDx=0;exitDy=15;" edge="1" source="out" target="ai-app" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="710" y="167" />
+              <mxPoint x="710" y="90" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- out → drawio-app (下右) -->
+        <mxCell id="a7" value="再編集可能" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;strokeWidth=2;dashed=1;fontSize=10;exitX=1;exitY=1;exitDx=0;exitDy=-15;" edge="1" source="out" target="drawio-app" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="710" y="210" />
+              <mxPoint x="710" y="305" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- out → c-text (チャンク構造へ) -->
+        <mxCell id="a8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#666666;strokeWidth=1;dashed=1;fontSize=9;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" source="out" target="c-text" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="900" y="187" />
+              <mxPoint x="930" y="187" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

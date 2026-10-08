@@ -16,12 +16,12 @@
         </mxCell>
 
         <!-- ===== Step 2: minimal PNG ===== -->
-        <mxCell id="step2" value="&lt;b&gt;② 1×1 白PNG生成&lt;/b&gt;&lt;br/&gt;&lt;font style=&apos;font-size:10px;&apos;&gt;IHDR + IDAT + IEND&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;arcSize=15;" vertex="1" parent="1">
+        <mxCell id="step2" value="&lt;b&gt;② Generate 1×1 PNG&lt;/b&gt;&lt;br/&gt;&lt;font style=&apos;font-size:10px;&apos;&gt;IHDR + IDAT + IEND&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;arcSize=15;" vertex="1" parent="1">
           <mxGeometry x="400" y="60" width="160" height="64" as="geometry" />
         </mxCell>
 
         <!-- ===== Step 3: tEXt chunk ===== -->
-        <mxCell id="step3" value="&lt;b&gt;③ tEXt チャンク挿入&lt;/b&gt;&lt;br/&gt;&lt;font style=&apos;font-size:10px;&apos;&gt;keyword=&amp;quot;mxfile&amp;quot;&lt;br/&gt;value=URL-encoded XML&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;arcSize=15;" vertex="1" parent="1">
+        <mxCell id="step3" value="&lt;b&gt;③ Insert tEXt chunk&lt;/b&gt;&lt;br/&gt;&lt;font style=&apos;font-size:10px;&apos;&gt;keyword=&amp;quot;mxfile&amp;quot;&lt;br/&gt;value=URL-encoded XML&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;arcSize=15;" vertex="1" parent="1">
           <mxGeometry x="400" y="256" width="160" height="74" as="geometry" />
         </mxCell>
 

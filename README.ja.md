@@ -137,7 +137,7 @@ python3 -m make_drawio_png --render "<path>.drawio"
 
 ## How it works（仕組み）
 
-![How make-drawio-png works](docs/how-it-works.drawio.png)
+![make-drawio-png の仕組み](docs/how-it-works.ja.drawio.png)
 
 `.drawio.png` ファイルは、通常の PNG 画像でありながら draw.io で再編集できるソースでもあります。  
 draw.io は埋め込まれた `tEXt[mxfile]` チャンクを読んで図を完全に復元します。  
