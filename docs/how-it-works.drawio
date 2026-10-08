@@ -1,0 +1,130 @@
+<mxfile host="app.diagrams.net" modified="2026-10-09T00:00:00.000Z" agent="Bob AI" version="21.0.0" type="device">
+  <diagram id="how-it-works" name="How it works">
+    <mxGraphModel dx="1200" dy="600" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1000" pageHeight="420" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===== .drawio file ===== -->
+        <mxCell id="src" value=".drawio&#xa;mxfile XML" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;align=center;" vertex="1" parent="1">
+          <mxGeometry x="40" y="148" width="110" height="64" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Step 1: URL-encode ===== -->
+        <mxCell id="step1" value="&lt;b&gt;① URL-encode&lt;/b&gt;&lt;br/&gt;&lt;font style=&apos;font-size=10px&apos;&gt;UTF-8 → %XX ASCII&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="180" y="158" width="160" height="64" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Step 2: minimal PNG ===== -->
+        <mxCell id="step2" value="&lt;b&gt;② 1×1 白PNG生成&lt;/b&gt;&lt;br/&gt;&lt;font style=&apos;font-size:10px;&apos;&gt;IHDR + IDAT + IEND&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="400" y="60" width="160" height="64" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Step 3: tEXt chunk ===== -->
+        <mxCell id="step3" value="&lt;b&gt;③ tEXt チャンク挿入&lt;/b&gt;&lt;br/&gt;&lt;font style=&apos;font-size:10px;&apos;&gt;keyword=&amp;quot;mxfile&amp;quot;&lt;br/&gt;value=URL-encoded XML&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="400" y="256" width="160" height="74" as="geometry" />
+        </mxCell>
+
+        <!-- ===== .drawio.png output ===== -->
+        <mxCell id="out" value="&lt;b&gt;.drawio.png&lt;/b&gt;" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;html=1;image=img/lib/active_directory/generic_server.svg;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;align=center;" vertex="1" parent="1">
+          <mxGeometry x="640" y="150" width="80" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ===== PNG chunk layout box ===== -->
+        <mxCell id="layout-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="790" y="60" width="180" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="layout-title" value="&lt;b&gt;PNG chunk layout&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="790" y="68" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="c-sig"  value="PNG Signature  (8 bytes)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="805" y="96" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c-ihdr" value="IHDR chunk  (25 bytes)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="805" y="134" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c-text" value="&lt;b&gt;tEXt chunk ← embedded here&lt;/b&gt;&lt;br/&gt;keyword=&amp;quot;mxfile&amp;quot; \\0 URL-XML" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="805" y="172" width="150" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="c-idat" value="IDAT chunk  (pixel data)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="805" y="226" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c-iend" value="IEND chunk" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="805" y="264" width="150" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ===== draw.io reads ===== -->
+        <mxCell id="drawio-app" value="&lt;b&gt;draw.io&lt;/b&gt;&lt;br/&gt;reads tEXt[mxfile]&lt;br/&gt;→ restores diagram" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="640" y="270" width="130" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ===== AI agent reads ===== -->
+        <mxCell id="ai-app" value="&lt;b&gt;AI Agent / Bob&lt;/b&gt;&lt;br/&gt;reads PNG image&lt;br/&gt;→ visual inspection" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="640" y="60" width="130" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ===== arrows ===== -->
+        <!-- src → step1 -->
+        <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" source="src" target="step1" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- step1 → step2 -->
+        <mxCell id="a2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="step1" target="step2" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="370" y="190" />
+              <mxPoint x="370" y="92" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- step1 → step3 -->
+        <mxCell id="a3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="step1" target="step3" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="370" y="190" />
+              <mxPoint x="370" y="293" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- step2 → out -->
+        <mxCell id="a4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=10;" edge="1" source="step2" target="out" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="610" y="92" />
+              <mxPoint x="630" y="92" />
+              <mxPoint x="630" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- step3 → out -->
+        <mxCell id="a5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=-10;" edge="1" source="step3" target="out" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="610" y="293" />
+              <mxPoint x="630" y="293" />
+              <mxPoint x="630" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- out → drawio-app -->
+        <mxCell id="a6" value="editable" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;strokeWidth=2;dashed=1;fontSize=10;" edge="1" source="out" target="drawio-app" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- out → ai-app -->
+        <mxCell id="a7" value="viewable" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=2;dashed=1;fontSize=10;" edge="1" source="out" target="ai-app" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- out → layout-bg -->
+        <mxCell id="a8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#666666;strokeWidth=1;dashed=1;fontSize=9;" edge="1" source="out" target="c-text" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== title ===== -->
+        <mxCell id="title" value="&lt;b&gt;&lt;font style=&apos;font-size:16px;&apos;&gt;How make-drawio-png works&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="200" y="10" width="500" height="36" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
