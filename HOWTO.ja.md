@@ -57,7 +57,7 @@ export DRAWIO_PATH="/Applications/draw.io.app/Contents/MacOS/draw.io"
 
 ## ワークフロー全体像
 
-![How make-drawio-png works](docs/how-it-works.drawio.png)
+![make-drawio-png の仕組み](docs/how-it-works.ja.drawio.png)
 
 ```
 ① Bob が .drawio XML を生成
