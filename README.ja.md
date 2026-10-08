@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/phssakaigawa/make-drawio-png/blob/main/LICENSE)
 [![CI](https://github.com/phssakaigawa/make-drawio-png/actions/workflows/ci.yml/badge.svg)](https://github.com/phssakaigawa/make-drawio-png/actions/workflows/ci.yml)
 
-**[English README → README.md](README.md)**
+**[English README → README.md](https://github.com/phssakaigawa/make-drawio-png/blob/main/README.md)**
 
 [draw.io / diagrams.net](https://www.diagrams.net/) が使用する **`.drawio.png` ファイル形式**を
 実装した Python ライブラリです。
@@ -151,7 +151,7 @@ python3 -m make_drawio_png --render "<path>.drawio"
 
 ## How it works（仕組み）
 
-![make-drawio-png の仕組み](docs/how-it-works.ja.drawio.png)
+![make-drawio-png の仕組み](https://raw.githubusercontent.com/phssakaigawa/make-drawio-png/main/docs/how-it-works.ja.drawio.png)
 
 `.drawio.png` ファイルは、通常の PNG 画像でありながら draw.io で再編集できるソースでもあります。  
 draw.io は埋め込まれた `tEXt[mxfile]` チャンクを読んで図を完全に復元します。  

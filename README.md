@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/phssakaigawa/make-drawio-png/blob/main/LICENSE)
 [![CI](https://github.com/phssakaigawa/make-drawio-png/actions/workflows/ci.yml/badge.svg)](https://github.com/phssakaigawa/make-drawio-png/actions/workflows/ci.yml)
 
-**[日本語版 README はこちら → README.ja.md](README.ja.md)**
+**[日本語版 README はこちら → README.ja.md](https://github.com/phssakaigawa/make-drawio-png/blob/main/README.ja.md)**
 
 A Python library that implements the **`.drawio.png` file format** — the
 re-editable PNG format used by [draw.io / diagrams.net](https://www.diagrams.net/).
@@ -169,7 +169,7 @@ subprocess.run([scripts / "make-drawio-png", "architecture.drawio"])
 
 ## How it works
 
-![How make-drawio-png works](docs/how-it-works.drawio.png)
+![How make-drawio-png works](https://raw.githubusercontent.com/phssakaigawa/make-drawio-png/main/docs/how-it-works.drawio.png)
 
 The `.drawio.png` file is both a valid PNG image and a re-editable draw.io
 source.  draw.io reads the embedded `tEXt[mxfile]` chunk to restore the full
